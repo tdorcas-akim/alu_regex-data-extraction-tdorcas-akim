@@ -10,13 +10,12 @@ def extract_urls(text):
     return re.findall(url_pattern, text)
 
 def extract_time_formats(text):
-    """Extract time formats (12h and 24h) from text."""
-    # 24-hour format (00:00 to 23:59)
-    hour24_pattern = r'\b([01]?[0-9]|2[0-3]):[0-5][0-9]\b'
-    
+    """Extract time formats (12h and 24h) from text.""" 
     # 12-hour format with AM/PM
     hour12_pattern = r'\b(1[0-2]|0?[1-9]):[0-5][0-9]\s?(AM|PM|am|pm)\b'
     
+    # 24-hour format (00:00 to 23:59)
+    hour24_pattern = r'\b([01]?[0-9]|2[0-3]):[0-5][0-9]\b'
     return re.findall(hour24_pattern, text) + re.findall(hour12_pattern, text)
 
 def extract_currency_amounts(text):
