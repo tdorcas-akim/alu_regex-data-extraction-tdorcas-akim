@@ -1,16 +1,16 @@
 import re 
-def extract_email_addresses(text):
-    """Extract email addresses from text."""
-    email_pattern = r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}'
-    return re.findall(email_pattern, text)
+def getemail(text):
+    #Get email addresses from text.
+    emailpattern = r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}'
+    return re.findall(emailpattern, text)
 
-def extract_urls(text):
-    """Extract URLs from text."""
-    url_pattern = r'https?://[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}[/\w.-]*'
-    return re.findall(url_pattern, text)
+def geturls(text):
+    #Get URLs from text.
+    urlpattern = r'https?://[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}[/\w.-]*'
+    return re.findall(urlpattern, text)
 
-def extract_time_formats(text):
-    """Extract time formats (12h and 24h) from text.""" 
+def gettime(text):
+    #Extract time formats (12h and 24h) from text.
     # 12-hour format with AM/PM
     hour12_pattern = r'\b(1[0-2]|0?[1-9]):[0-5][0-9]\s?(AM|PM|am|pm)\b'
     
@@ -18,24 +18,24 @@ def extract_time_formats(text):
     hour24_pattern = r'\b([01]?[0-9]|2[0-3]):[0-5][0-9]\b'
     return re.findall(hour24_pattern, text) + re.findall(hour12_pattern, text)
 
-def extract_currency_amounts(text):
-    """Extract currency amounts from text."""
-    currency_pattern = r'[$€£¥]\d+(?:,\d{3})*(?:\.\d{2})?'
-    return re.findall(currency_pattern, text)
+def getcurrency(text):
+    #Get currency amounts from text.
+    currencypattern = r'[$€£¥]\d+(?:,\d{3})*(?:\.\d{2})?'
+    return re.findall(currencypattern, text)
 
-def extract_hashtags(text):
-    """Extract hashtags from text."""
-    hashtag_pattern = r'#[a-zA-Z0-9_]+'
-    return re.findall(hashtag_pattern, text)
+def gethashtags(text):
+    #Get all the hashtags from text.
+    hashtagpattern = r'#[a-zA-Z0-9_]+'
+    return re.findall(hashtagpattern, text)
 
-def extract_all_data(text):
-    """Extract all types of data from text and return as dictionary."""
+def getalldata(text):
+    #Get all types of data from text in form of dictionary."""
     return {
-        "Emails": extract_email_addresses(text),
-        "URLs": extract_urls(text),
-        "Time Formats": extract_time_formats(text),
-        "Currency Amounts": extract_currency_amounts(text),
-        "Hashtags": extract_hashtags(text)
+        "Emails": getemail(text),
+        "URLs": geturls(text),
+        "Time Formats": gettime(text),
+        "Currency Amounts": getcurrency(text),
+        "Hashtags": gethashtags(text)
     }
 
 def print_results(results):
@@ -70,7 +70,7 @@ print(example_text)
 print("-" * 40)
 
 # Extract and display results
-results = extract_all_data(example_text)
+results = getalldata(example_text)
 print_results(results)
 
 # Simple user interaction
@@ -86,7 +86,7 @@ while True:
 
 if user_lines:
     user_text = "\n".join(user_lines)
-    user_results = extract_all_data(user_text)
+    user_results = getalldata(user_text)
     print_results(user_results)
 else:
     print("No input provided. Bye Bye!")
