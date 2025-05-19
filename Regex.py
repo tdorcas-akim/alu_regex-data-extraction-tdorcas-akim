@@ -20,7 +20,7 @@ def gettime(text):
 
 def getcurrency(text):
     #Get currency amounts from text.
-    currencypattern = r'[$€£¥]\d+(?:,\d{3})*(?:\.\d{2})?'
+    currencypattern = r'[$€£¥]|BIF|RWF)\d+(?:,\d{3})*(?:\.\d{2})?'
     return re.findall(currencypattern, text)
 
 def gethashtags(text):
@@ -29,14 +29,12 @@ def gethashtags(text):
     return re.findall(hashtagpattern, text)
 
 def getalldata(text):
-    #Get all types of data from text in form of dictionary."""
-    return {
-        "Emails": getemail(text),
+    #Get all types of data from text in form of dictionary.
+    return {"Emails": getemail(text),
         "URLs": geturls(text),
         "Time Formats": gettime(text),
-        "Currency Amounts": getcurrency(text),
-        "Hashtags": gethashtags(text)
-    }
+        "Currency": getcurrency(text),
+        "Hashtags": gethashtags(text)}
 
 def print_results(results):
     """Print extracted data in a nice format."""
@@ -56,8 +54,8 @@ example_text = """
 Check out my website at https://www.coolsite.com or email me at 
 john.doe@example.com. I'm available from 9:30 AM to 17:45 daily.
 
-The product costs $19.99, but premium users pay $9.99. 
-European price: €15.50.
+The product costs 35000BIF, but premium users pay 25000BIF. 
+#European price: €15.50.
 
 Follow us with #CoolProject and #RegexIsFun!
 Meeting at 3:45 PM tomorrow. Budget: $1,234.56.
