@@ -90,4 +90,4 @@ if user_lines:
     user_results = extract_all_data(user_text)
     print_results(user_results)
 else:
-    print("No input provided. Goodbye!")
+    print("No input provided. Bye Bye!")
